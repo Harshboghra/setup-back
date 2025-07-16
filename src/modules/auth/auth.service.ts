@@ -1,7 +1,4 @@
-import {
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { HashService } from 'src/common/hash.service';
 import { User } from '../users/entities/user.entity';
@@ -31,7 +28,7 @@ export class AuthService {
 
   /* ---------- Login ---------- */
   async validateUser(username: string, pass: string) {
-    const user = await this.user.findByUsername(username);
+    const user = await this.user.findByUsernameWithPassword(username);
     if (!user) throw new UnauthorizedException();
     const ok = await this.hash.compare(pass, user.password);
     return ok ? user : null;

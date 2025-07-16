@@ -14,6 +14,7 @@ export class JwtRefreshStrategy extends PassportStrategy(
     });
   }
   validate(req: any) {
+    console.log('JWT Refresh Strategy validate called', req);
     return { userId: req.sub };
   }
 }
