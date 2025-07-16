@@ -27,9 +27,4 @@ export class AuthController {
   refresh(@Req() req) {
     return this.auth.refresh(req.user.userId);
   }
-
-  @Post('logout')
-  async logout(@Req() req) {
-    await this.auth.logout(req.user.userId);
-  }
 }

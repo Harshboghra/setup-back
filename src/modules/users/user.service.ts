@@ -1,40 +1,37 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { User } from './entities/user.entity';
+import { AbstractService } from 'src/common/abstract.service';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from './entities/user.entity';
 
 @Injectable()
-export class UsersService {
+export class UserService extends AbstractService {
   constructor(
-    @InjectRepository(User) private readonly repo: Repository<User>,
-  ) {}
+    @InjectRepository(User) private readonly UserRepository: Repository<User>,
+  ) {
+    super(UserRepository);
+  }
 
   async create(data: Partial<User>): Promise<User> {
-    const user = this.repo.create(data);
-    return this.repo.save(user);
+    return this.abstractCreate(data);
   }
 
   async findByUsername(username: string): Promise<User | null> {
-    const result = await this.repo.find({ where: { username } });
-    return result?.[0];
+    return this.abstractFindOne({ where: { username } });
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    return this.repo.findOne({ where: { email } });
+    return this.abstractFindOne({ where: { email } });
   }
 
   async findById(id: number): Promise<User> {
-    const user = await this.repo.findOne({ where: { id } });
+    const user = await this.abstractFindOne({ where: { id } });
     if (!user) throw new NotFoundException('User not found');
     return user;
   }
 
   async update(id: number, data: Partial<User>) {
-    await this.repo.update(id, data);
+    await this.abstractUpdate(id, data);
     return this.findById(id);
-  }
-
-  async save(user: User) {
-    return this.repo.save(user);
   }
 }

@@ -11,7 +11,10 @@ export const typeOrmConfig = (): DataSourceOptions => {
     username: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
     database: process.env.POSTGRES_DB,
-    entities: ['dist/**/*.entity.{js,ts}'],
+    entities: [
+      join(__dirname, '..', '**', '*.entity.{ts,js}'),
+      join(__dirname, '..', '**', 'entities/*.{ts,js}'),
+    ],
     migrations: [join(__dirname, '..', '**', '/migrations/*.{ts,js}')],
     synchronize: false,
     migrationsTableName: 'migrations',

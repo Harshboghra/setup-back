@@ -3,7 +3,7 @@ import { MigrationInterface, QueryRunner } from 'typeorm';
 export class Setup1752497963530 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
-      CREATE TABLE IF NOT EXISTS "users" (
+      CREATE TABLE IF NOT EXISTS "user" (
         "id" SERIAL PRIMARY KEY,
         "username" VARCHAR(50) NOT NULL UNIQUE,
         "email" VARCHAR(100) NOT NULL UNIQUE,
@@ -16,7 +16,7 @@ export class Setup1752497963530 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`
-      DROP TABLE IF EXISTS "users";
+      DROP TABLE IF EXISTS "user";
     `);
   }
 }
