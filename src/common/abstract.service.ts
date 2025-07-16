@@ -1,5 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import {
+  ConflictException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
+import { QueryFailedError, Repository } from 'typeorm';
+import { handleDbError } from './utils/handle-db-error';
 
 @Injectable()
 export abstract class AbstractService {
@@ -15,8 +20,12 @@ export abstract class AbstractService {
   }
 
   async abstractCreate(data): Promise<any> {
-    const entity = await this.repository.create(data);
-    return await this.repository.save(entity);
+    try {
+      const entity = this.repository.create(data);
+      return await this.repository.save(entity);
+    } catch (error) {
+      handleDbError(error);
+    }
   }
 
   async abstractUpdate(id: number | string, data): Promise<any> {

@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, Not } from 'typeorm';
 
 @Entity('user', { schema: 'public' })
 export class User {
