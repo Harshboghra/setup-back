@@ -1,9 +1,5 @@
-import {
-  ConflictException,
-  Injectable,
-  InternalServerErrorException,
-} from '@nestjs/common';
-import { QueryFailedError, Repository } from 'typeorm';
+import { Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm';
 import { handleDbError } from './utils/handle-db-error';
 
 @Injectable()
