@@ -1,8 +1,8 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { HashService } from 'src/common/hash.service';
-import { User } from '../users/entities/user.entity';
-import { UserService } from '../users/user.service';
+import { User } from '../user/entities/user.entity';
+import { UserService } from '../user/user.service';
 import { RegisterDto } from './dto/register.dto';
 
 @Injectable()

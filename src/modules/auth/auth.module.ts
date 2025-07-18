@@ -8,7 +8,7 @@ import { LocalStrategy } from './strategy/local.strategy';
 import { JwtStrategy } from './strategy/jwt.strategy';
 import { JwtRefreshStrategy } from './strategy/jwt-refresh.strategy';
 import { AuthController } from './auth.controller';
-import { UsersModule } from '../users/user.module';
+import { UserModule } from '../user/user.module';
 import { HashService } from 'src/common/hash.service';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from 'src/core/guards/auth-guard';
@@ -28,7 +28,7 @@ import { JwtAuthGuard } from 'src/core/guards/auth-guard';
         signOptions: { expiresIn: process.env.JWT_ACCESS_TTL },
       }),
     }),
-    UsersModule,
+    UserModule,
   ],
   controllers: [AuthController],
   providers: [

@@ -1,4 +1,4 @@
 import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/user.module';
+import { UserModule } from './user/user.module';
 
-export const ApplicationModules = [AuthModule, UsersModule];
+export const ApplicationModules = [AuthModule, UserModule];
