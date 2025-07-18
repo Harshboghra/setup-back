@@ -36,8 +36,7 @@ export class UserService extends AbstractService {
   }
 
   async findByUsernameWithPassword(username: string): Promise<User | null> {
-    return this.UserRepository
-      .createQueryBuilder('user')
+    return this.UserRepository.createQueryBuilder('user')
       .addSelect('user.password')
       .where('user.username = :username', { username })
       .getOne();

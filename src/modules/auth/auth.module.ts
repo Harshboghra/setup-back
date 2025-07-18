@@ -40,7 +40,7 @@ import { JwtAuthGuard } from 'src/core/guards/auth-guard';
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
-    }
+    },
   ],
   exports: [AuthService],
 })
